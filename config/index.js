@@ -12,8 +12,8 @@ let connection = createPool({
 })
 
 
-connection.on('connection', (err) => {
-    if(err)throw new Error('Could not connect to database')
+connection.on('connection', (pool) => {
+    if(!pool)throw new Error('Could not connect to database')
 })
 
 export {

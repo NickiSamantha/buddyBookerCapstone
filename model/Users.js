@@ -10,7 +10,8 @@ class Users {
             `;
 
       db.query(strQry, (err, result) => {
-        if (err) throw new Error(`Unable to fetch all users: `, err);
+        //`Unable to fetch all users: `
+        if (err) throw new Error(err.message );
         res.json({
           status: res.statusCode,
           result,
