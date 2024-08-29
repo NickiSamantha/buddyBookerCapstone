@@ -2,9 +2,9 @@ import { Users } from "./Users.js";
 import { Sitters } from "./Sitters.js";
 
 const users = new Users();
-const products = new Sitters();
+const sitters = new Sitters();
 
 export {
     users,
-    Sitters
+    sitters
 }
