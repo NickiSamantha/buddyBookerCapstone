@@ -20,3 +20,17 @@
   nav a.router-link-exact-active {
     color: #42b983;
   }
+
+  /* Navbar */
+  img {
+    aspect-ratio: 1 ;
+    object-fit: cover; /*change between cover and contain*/
+    object-position: center;
+    border-radius: 1rem;
+    animation: hop 2s ease-in-out;
+ }
+
+   
+ 
+
+ /* Footer */
