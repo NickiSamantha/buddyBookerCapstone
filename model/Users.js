@@ -141,7 +141,8 @@ class Users {
         } else {
           const isValidPass = await compare(pwd, result[0].pwd);
           if (isValidPass) {
-            const token = createToken({ emailAdd: result[0].emailAdd });
+            const user = {emailAdd, pwd}
+            const token = createToken(user);
             res.json({
               status: res.statusCode,
               token,
