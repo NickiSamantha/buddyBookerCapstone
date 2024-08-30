@@ -48,11 +48,12 @@ class Users {
   }
   async registerUser(req, res) {
     try {
-      let data = req.body;
-      data.userPass = await hash(data.userPass, 12);
+        let data = req.body;
+        //console.log(data);
+      data.pwd = await hash(data.pwd, 12);
       let user = {
         emailAdd: data.emailAdd,
-        userPass: data.userPass,
+        pwd: data.pwd,
       };
 
       const strQry = `
@@ -84,8 +85,8 @@ class Users {
   async updateUser(req, res) {
     try {
       let data = req.body;
-      if (data.userPass) {
-        data.userPass = await hash(data.userPass, 12);
+      if (data.pwd) {
+        data.pwd = await hash(data.pwd, 12);
       }
       const strQry = `
               UPDATE Users
@@ -124,7 +125,7 @@ class Users {
   }
   async login(req, res) {
     try {
-      const { emailAdd, userPass } = req.body;
+      const { emailAdd, pwd } = req.body;
       const strQry = `
               SELECT *
               FROM Users
@@ -138,9 +139,9 @@ class Users {
             message: "You provided the wrong email.",
           });
         } else {
-          const isValidPass = await compare(userPass, result[0].userPass);
+          const isValidPass = await compare(pwd, result[0].pwd);
           if (isValidPass) {
-            const token = createToken({ emailAdd, userPass });
+            const token = createToken({ emailAdd, pwd });
             res.json({
               status: res.statusCode,
               token,

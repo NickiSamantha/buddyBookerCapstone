@@ -7,32 +7,36 @@ const createToken = (userInfo) => {
     return sign(
         {
             emailAdd: userInfo.emailAdd,
-            password: userInfo.pwd
+            pwd: userInfo.pwd
         },
-        process.env.SECRET_KEY
-    )
+        process.env.SECRET_KEY,
+        {expirersIn: '1h'} 
+    );
 }
 
 const verifyToken = (req, res, next) => {
     const token = req?.headers["authorization"];
     if(token){
-        if(verify(token, process.env.SECRET_KEY)){
-            next()
-        } else {
-            res?.json({
-                status: res.statusCode,
-                msg: "Please provide the correct details."
-            })
+        try {
+            const decoded = verify(token, process.env.SECRET_KEY);
+            req.user = decoded; 
+            next();
+        } catch (err) {
+            res.status(404).json({
+                status :404,
+                msg: 'Invalid or expired token. Please login again.'
+            });
         }
     } else {
-        res?.json({
-            status: res.statusCode,
-            msg: "Please log in."
-        })
-    }
+        res.status(401).json({
+            status:401,
+            msg: 'Please login'
+        });
+    } 
 }
+    
 
-export {
-    createToken,
-    verifyToken
-}
+    export {
+        createToken,
+        verifyToken
+    }
