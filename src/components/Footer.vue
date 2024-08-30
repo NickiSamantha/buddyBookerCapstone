@@ -1,5 +1,5 @@
 <template>
-    <footer class="bottom footer container-fluid sticky-bottom ">
+    <footer class="footer container-fluid fixed-bottom ">
     <div class="row">
         <p class="lead">Nicki Abels Copyright &copy;
             <span>{{cYear}}</span>
@@ -23,5 +23,11 @@ export default {
 </script>
 
 <style>
+.footer {
+    background-color: #d9d9d9;
+}
+.lead {
+   
+}
 
 </style>

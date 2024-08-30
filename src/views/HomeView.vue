@@ -13,7 +13,7 @@
           data-aos-delay="300"
         >Welcome to BuddyBooker 
         </h1>
-        <i>Let us help you find the perfect babysitter</i>
+        <i>Your Trusted Babysitting Solution</i>
         <router-link to="/sitters" class="btn btn-secondary match">Find your match</router-link>
     
       </div>
@@ -46,8 +46,8 @@ export default {
 }
 .hero {
   background: url('https://nickisamantha.github.io/allImages/images/bblogo.png') no-repeat center center;
-  background-size: cover ;
-  height: 90vh;
+  background-size: contain ; 
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -68,5 +68,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-
+.container{
+  background-color: #d9d9d9;
+}
 </style>

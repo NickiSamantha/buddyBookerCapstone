@@ -70,12 +70,12 @@
           setup() {
             const store = useStore();
 
-            //const isAdmin =computed( () => store.state.user.role === 'admin');
+            const isAdmin =computed( () => store.state.user?.role === 'admin');
 
-            const isAuthenticated = computed( () => !!store.state.user.token)
+            const isAuthenticated = computed( () => !store.state.user?.token)
 
             return {
-                //isAdmin, 
+                isAdmin, 
                 isAuthenticated,
             };
           },
@@ -87,6 +87,11 @@
     width: 5rem ;
     border: 1px solid  #9b9998;
     cursor: pointer;
+} 
+
+.NavBar{
+    background-color: #d9d9d9;
 }
+
   
   </style>
