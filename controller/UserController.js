@@ -31,6 +31,6 @@ userRouter.post('/login', (req, res) => {
 })
 
 export {
-    express,
+    // express,
     userRouter
 }

@@ -131,7 +131,7 @@ class Users {
               FROM Users
               WHERE emailAdd = '${emailAdd}';
             `;
-      db.query(strQry, async (err, result) => {
+      db.query(strQry,[emailAdd], async (err, result) => {
         if (err) throw new Error(`To login, please review your query.`);
         if (!result?.length) {
           res.json({
@@ -141,7 +141,7 @@ class Users {
         } else {
           const isValidPass = await compare(pwd, result[0].pwd);
           if (isValidPass) {
-            const token = createToken({ emailAdd, pwd });
+            const token = createToken({ emailAdd: result[0].emailAdd });
             res.json({
               status: res.statusCode,
               token,
@@ -161,6 +161,39 @@ class Users {
         status: 401,
         message: error.message,
       });
+    }
+  }
+  async logout (req, res) {
+    try { 
+        const token = req.headers.authorization?.split('')[1];
+        if(!token) {
+            return res.status(404).json ({
+                status: 404,
+                message:'No token provided.' ,
+            });
+        }
+        const strQry = `
+        INSERT INTO TokenBlacklist (token) 
+        VALUES (?);
+        `;
+        db.query(strQry, [token], (err) => {
+            if (err) {
+                console.error('Failed to blacklist token:', err);
+                return res.status(404).json({
+                    status:404,
+                    message: 'Failed to logout. Please try again.',
+                });
+            }
+            res.json ({
+                status:200, 
+                message: 'You have been logged out successfully.',
+            });
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: 404,
+            message: error.message,
+        })
     }
   }
 }
