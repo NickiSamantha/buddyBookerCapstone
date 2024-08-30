@@ -2,8 +2,9 @@ import { createStore } from 'vuex' ;
 import axios from 'axios' ; 
 import {toast} from 'toastify' ;
 //import 'toastify/dist/index.css';
+import router from '@/router';
 import {applyToken } from '../service/AuthenticatedUser.js'
-import {useCookies} from 'cookies';
+import {useCookies} from 'vue3-cookies';
 const {cookies} = useCookies()
 
 const apiURL = "https://buddybookercapstone.onrender.com/";
@@ -54,7 +55,7 @@ export default createStore({
     // Fetch all bookings
   async fetchBookings(context) {
     try {
-      const results = await axios.get(`${apiURL}bookings`);
+      const {results} = await axios.get(`${apiURL}bookings`);
       context.commit("setBookings", results.data);
     } catch (e) {
       toast.error(`${e.message}`, {
@@ -67,7 +68,7 @@ export default createStore({
   // Fetch a single booking by ID
   async fetchBooking(context, bookingID) {
     try {
-      const result = await axios.get(`${apiURL}bookings/${bookingID}`);
+      const {result} = await axios.get(`${apiURL}bookings/${bookingID}`);
       context.commit("setBooking", result.data);
     } catch (e) {
       toast.error(`${e.message}`, {
@@ -135,22 +136,22 @@ export default createStore({
   async login(context, payload) {
     try {
       console.log(payload);
-      const { msg, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
+      const { message, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
 
       if (result) {
-        toast.success(`${msg}😎`, {
+        toast.success(`${message}😎`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
         context.commit('setUser', {
-          msg,
+          message,
           result
         })
-        cookies.set('LegitUser', { token, msg, result })
+        cookies.set('LegitUser', { token, message, result })
         applyToken(token)
-         //router.push({ name: 'sitters' })
+         router.push({ name: 'sitters' })
       } else {
-        toast.error(`${msg}`, {
+        toast.error(`${message}`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
