@@ -10,31 +10,35 @@
       profiles, BuddyBooker makes it easy to book trusted childcare
       professionals who match your needs. </p>
       
+      <div class="text">
       Key Features:
+    </div>
 
-      <ul class="features">
-        Verified Sitters:
-      <span> Comprehensive background checks and references ensure you're choosing from
-        the best.  </span>
-      </ul> 
-    
-      <ul> 
-        Real-Time Availability: 
-        <span> See when your preferred sitter is available and book instantly.</span>
-      </ul> 
-      <ul>
-        Custom Profiles: 
-        <span> Detailed profiles and reviews help you find a sitter that suits your family's unique needs. 
-        </span>
-      </ul>
+<ul class="features">
+  Verified Sitters:
+<span> Comprehensive background checks and references ensure you're choosing from
+  the best.  </span>
+</ul> 
 
-      <ul>
-        Easy Booking: 
-        <span>
-          Schedule, manage, and modify bookings with just a few clicks.
-      
-        </span>
-      </ul>
+<ul> 
+  Real-Time Availability: 
+  <span> See when your preferred sitter is available and book instantly.</span>
+</ul> 
+<ul>
+  Custom Profiles: 
+  <span> Detailed profiles and reviews help you find a sitter that suits your family's unique needs. 
+  </span>
+</ul>
+
+<ul>
+  Easy Booking: 
+  <span>
+    Schedule, manage, and modify bookings with just a few clicks.
+
+  </span>
+</ul>
+     
+   
    
       <p>  
       Whether you need a night out or regular help, BuddyBooker is here to make
@@ -45,9 +49,14 @@
 </template>
 
 <style>
-/* .about{
+body{
   background-color: #f75e66;
-  height: 100vh;
+  /* height: 100vh; */
+}
+/* .text {
+  
+  padding : 20px ;
+  margin: 20px;
 } */
 /* body{
   font-family: Arial, sans-serif;
@@ -55,28 +64,32 @@
             color: #333;
             margin: 20px;
      } */
+.text {
+  text-align: center;
+}
 
-/* 
         h1 {
             text-align: center;
             color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            /* font-size: 2.5em; */
+            margin-top: 20px;
         }
+        
      p {
-            margin-bottom: 20px;
+            margin: 10px;
             padding: 0 10px;
         }
-.features {
+         
+/* .features {
             list-style-type: none;
             padding: 0;
             margin: 20px 0;
+        } */
+        .features ul {
+            /* margin-bottom: 10px; */
+            font-weight: bolder;
         }
-        .features li {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .features span {
+        /* .features span {
             font-weight: normal;
             color: #555;
         } */

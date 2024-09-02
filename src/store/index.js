@@ -228,6 +228,96 @@ export default createStore({
       });
     }
   },
+
+  //SITTERS
+  async fetchSitters(context) {
+    try {
+      const  {results}   = await (await axios.get(`${apiURL}sitters`)).data;
+      if (results) {
+        console.log(results)
+        context.commit("setSitters", results);
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  },
+  async fetchSitter(context, id) {
+    try {
+      const {result}  = await (
+        await axios.get(`${apiURL}sitters/${id}`)
+      ).data;
+      if (result) {
+        context.commit("setSitter", result);
+      } 
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  },
+  async addASitter(context, payload) {
+    try {
+      const msg  = await (
+        await axios.post(`${apiURL}sitters/addSitter`, payload)
+      ).data;
+      if (msg) {
+        context.dispatch("fetchSitters");
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  },
+  async updateSitter(context, sitID, payload) {
+    try {
+      console.log(payload);
+      const msg  = await (
+        await axios.patch(`${apiURL}sitters/update/${sitID}`, payload)
+      ).data;
+      if (msg) {
+        context.dispatch("fetchSitters");
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  },
+  async deleteSitter(context, sitID) {
+    try {
+      const { msg } = await (
+        await axios.delete(`${apiURL}sitters/delete/${sitID}`)
+      ).data;
+      if (msg) {
+        context.dispatch("fetchSitters");
+        toast.success(`${msg}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER,
+        });
+      }
+    } catch (e) {
+      toast.error(`${e.message}`, {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    }
+  },
+
   //  LOGIN 
   async login(context, payload) {
     try {
