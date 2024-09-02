@@ -11,7 +11,8 @@
       professionals who match your needs. </p>
       
       Key Features:
-      <ul>
+
+      <ul class="features">
         Verified Sitters:
       <span> Comprehensive background checks and references ensure you're choosing from
         the best.  </span>
@@ -44,8 +45,39 @@
 </template>
 
 <style>
-.about{
+/* .about{
   background-color: #f75e66;
   height: 100vh;
-}
+} */
+/* body{
+  font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 20px;
+     } */
+
+/* 
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+     p {
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+.features {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .features li {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .features span {
+            font-weight: normal;
+            color: #555;
+        } */
 </style>
