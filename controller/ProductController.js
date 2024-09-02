@@ -18,7 +18,7 @@ sitterRouter.get('/:id', (req, res) => {
     sitters.fetchSitter(req, res)
 })
 
-sitterRouter.post('/addProduct', (req, res) => {
+sitterRouter.post('/addSitter', (req, res) => {
     sitters.addSitter(req, res)
 })
 
