@@ -35,10 +35,10 @@
             </li>
   
             <li class="nav-item">
-              <router-link class="nav-link" to="/products">Sitters</router-link>
+              <router-link class="nav-link" to="/sitters">Sitters</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/checkout">Checkout</router-link>
+              <router-link class="nav-link" to="/bookings">Bookings</router-link>
             </li>
             <li class="nav-item" 
             v-if="isAdmin"
