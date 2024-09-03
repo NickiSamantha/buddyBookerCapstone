@@ -1,8 +1,8 @@
 import { createStore } from 'vuex' ;
 import axios from 'axios' ; 
-import {toast} from 'toastify' ;
+import {toast} from 'vue3-toastify' ;
 //import 'toastify/dist/index.css';
-//import router from '@/router';
+import router from '@/router';
 import {applyToken } from '../service/AuthenticatedUser.js'
 import {useCookies} from 'vue3-cookies';
 const {cookies} = useCookies()
@@ -326,13 +326,8 @@ export default createStore({
   async login({commit}, payload) {
     try {
       // console.log(payload);
-      const { message, result, token } = await (await axios.post(`${apiURL}login`, payload)).data
-
+      const { message, result, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
       if (result) {
-        toast.success(`${message}😎`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
         commit('setUser', {
           message,
           result, 
@@ -340,7 +335,16 @@ export default createStore({
         })
         cookies.set('LegitUser', { token, message, result })
         applyToken(token)
-       return {message, result};
+
+        setTimeout(()=>{
+          toast.success(`${message}😎`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }, 2000)
+        
+        router.push({name: 'home'})
+      //  return {message, result};
       } else {
         toast.error(`${message}`, {
           autoClose: 2000,
@@ -348,7 +352,7 @@ export default createStore({
         })
       }
     } catch (e) {
-      toast.error(`${e.message}`, {
+      toast?.error(`${e.message}`, {
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER
       })
