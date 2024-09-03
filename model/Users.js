@@ -123,34 +123,84 @@ class Users {
       res.json({ status: 404, message: error.message });
     }
   }
-  async login(req, res) {
+//   async login(req, res) {
+//     try {
+//       const { emailAdd, pwd } = req.body;
+//       const strQry = `
+//               SELECT *
+//               FROM Users
+//               WHERE emailAdd = '${emailAdd}';
+//             `;
+//       db.query(strQry,[emailAdd], async (err, result) => {
+//         if (err) throw new Error(`To login, please review your query.`);
+//         if (!result?.length) {
+//           res.json({
+//             status: 401,
+//             message: "You provided the wrong email.",
+//           });
+//         } else {
+//           const isValidPass = await compare(pwd, result[0].pwd);
+//           if (isValidPass) {
+//             const user = {emailAdd, pwd}
+//             const token = createToken(user);
+//             res.json({
+//               status: res.statusCode,
+//               token,
+//               result: result[0],
+//               message: `You have successfully logged in.`,
+//             });
+//           } else {
+//             res.json({
+//               status: 401,
+//               message: `Invalid password or you have not registered.`,
+//             });
+//           }
+//         }
+//       });
+//     } catch (error) {
+//       res.json({
+//         status: 401,
+//         message: error.message,
+//       });
+//     }
+//   }
+
+async login(req, res) {
     try {
       const { emailAdd, pwd } = req.body;
+  
+      // Use parameterized query to prevent SQL injection
       const strQry = `
-              SELECT *
-              FROM Users
-              WHERE emailAdd = '${emailAdd}';
-            `;
-      db.query(strQry,[emailAdd], async (err, result) => {
-        if (err) throw new Error(`To login, please review your query.`);
+        SELECT * FROM Users WHERE emailAdd = ?;
+      `;
+      
+      db.query(strQry, [emailAdd], async (err, result) => {
+        if (err) {
+          res.status(500).json({
+            status: 500,
+            message: 'Database error occurred.',
+          });
+          return;
+        }
+  
         if (!result?.length) {
-          res.json({
+          res.status(401).json({
             status: 401,
             message: "You provided the wrong email.",
           });
         } else {
           const isValidPass = await compare(pwd, result[0].pwd);
           if (isValidPass) {
-            const user = {emailAdd, pwd}
+            const user = { emailAdd, pwd, role: result[0].role }; // Add role to user
             const token = createToken(user);
-            res.json({
-              status: res.statusCode,
+            res.status(200).json({
+              status: 200,
               token,
               result: result[0],
               message: `You have successfully logged in.`,
             });
           } else {
-            res.json({
+            res.status(401).json({
               status: 401,
               message: `Invalid password or you have not registered.`,
             });
@@ -158,12 +208,13 @@ class Users {
         }
       });
     } catch (error) {
-      res.json({
-        status: 401,
+      res.status(500).json({
+        status: 500,
         message: error.message,
       });
     }
   }
+  
   async logout (req, res) {
     try { 
         const token = req.headers.authorization?.split('')[1];
