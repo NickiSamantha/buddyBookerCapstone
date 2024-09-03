@@ -55,6 +55,7 @@ export default {
   color: rgb(9, 9, 9);
   text-align: center;
   transition : opacity 1s ease-in-out;
+  font-family: '';
 }
 .hero-content{
   text-align: center;

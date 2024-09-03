@@ -49,11 +49,13 @@
               <router-link class="nav-link" to="/reachUs">Reach us</router-link>
             </li>
 
-            <li class="nav-item" v-if="!isAuthenticated">
+            <li class="nav-item" 
+          
+            >
             <router-link class="nav-link" to="/login">Login</router-link>
           </li>
-          <li class="nav-item" v-if="!isAuthenticated">
-            <router-link class="nav-link" to="/signup">Sign Up</router-link>
+          <li class="nav-item" >
+            <router-link class="nav-link" to="/register">Sign Up</router-link>
           </li> 
           </ul>
         </div>
