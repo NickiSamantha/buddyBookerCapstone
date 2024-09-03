@@ -4,7 +4,7 @@
   <main>
     <router-view />
   </main>
-  <FooterComp></FooterComp>
+  <FooterComp class="mt-auto"></FooterComp>
 </div>
 </template>
 

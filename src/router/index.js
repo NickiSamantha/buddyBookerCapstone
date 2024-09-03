@@ -24,7 +24,23 @@ const routes = [
     path:'/sitters/:id',
     name:'sitter',
     component : () => import('../views/SitterView.vue')
-  }
+  },
+  {
+    path: '/login' ,
+    name: 'login' , 
+    component : () => import( '../views/LoginView.vue')
+  } , 
+  {
+    path: '/register',
+    name: 'Register' , 
+    component: () => import('../views/RegisterView.vue')
+
+  },
+  {
+    path: '/reachUs',
+    name: 'reachUs',
+    component: () => import('@/views/ReachUs.vue')
+  },
 
 ]
 
