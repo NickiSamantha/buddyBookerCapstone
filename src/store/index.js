@@ -2,7 +2,7 @@ import { createStore } from 'vuex' ;
 import axios from 'axios' ; 
 import {toast} from 'toastify' ;
 //import 'toastify/dist/index.css';
-import router from '@/router';
+//import router from '@/router';
 import {applyToken } from '../service/AuthenticatedUser.js'
 import {useCookies} from 'vue3-cookies';
 const {cookies} = useCookies()
@@ -19,6 +19,7 @@ export default createStore({
     bookings: null, 
     booking:null, 
     availableSlots: null,
+    token: null, 
   },
   getters: {
   },
@@ -27,8 +28,11 @@ export default createStore({
     setUsers(state, value) {
       state.users = value;
     } , 
-    setUser(state, value) {
-      state.user = value;
+    setUser(state, {message, result, token}) {
+      state.user = result;
+      state.token = token ; 
+      state.message = message; 
+  
     },
 
     setSitters(state, value) {
@@ -319,23 +323,24 @@ export default createStore({
   },
 
   //  LOGIN 
-  async login(context, payload) {
+  async login({commit}, payload) {
     try {
-      console.log(payload);
-      const { message, result, token } = await (await axios.post(`${apiURL}user/login`, payload)).data
+      // console.log(payload);
+      const { message, result, token } = await (await axios.post(`${apiURL}login`, payload)).data
 
       if (result) {
         toast.success(`${message}😎`, {
           autoClose: 2000,
           position: toast.POSITION.BOTTOM_CENTER
         })
-        context.commit('setUser', {
+        commit('setUser', {
           message,
-          result
+          result, 
+          token
         })
         cookies.set('LegitUser', { token, message, result })
         applyToken(token)
-         router.push({ name: 'sitters' })
+       return {message, result};
       } else {
         toast.error(`${message}`, {
           autoClose: 2000,
