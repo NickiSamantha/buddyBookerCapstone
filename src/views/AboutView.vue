@@ -1,5 +1,5 @@
-<template>
-  <div class="about">
+<template class="">
+  <div class="about p-5">
     <h1>About BuddyBooker</h1>
 
     <p>
@@ -49,15 +49,14 @@
 </template>
 
 <style>
-body{
+.about{
   background-color: #f75e66;
-  /* height: 100vh; */
 }
-/* .text {
+.text {
   
   padding : 20px ;
   margin: 20px;
-} */
+}
 /* body{
   font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -71,7 +70,7 @@ body{
         h1 {
             text-align: center;
             color: #2c3e50;
-            /* font-size: 2.5em; */
+            font-size: 2.5em;
             margin-top: 20px;
         }
         
@@ -80,17 +79,17 @@ body{
             padding: 0 10px;
         }
          
-/* .features {
+.features {
             list-style-type: none;
             padding: 0;
             margin: 20px 0;
-        } */
+        }
         .features ul {
-            /* margin-bottom: 10px; */
+            margin-bottom: 10px;
             font-weight: bolder;
         }
-        /* .features span {
+        .features span {
             font-weight: normal;
             color: #555;
-        } */
+        }
 </style>
