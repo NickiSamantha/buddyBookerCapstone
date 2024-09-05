@@ -1,24 +1,28 @@
 import { connection as db } from "../config/index.js";
 
 class Bookings {
-  fetchBookings(req, res) {
-    try {
-      const strQry = `SELECT * FROM Bookings;`;
-
-      db.query(strQry, (err, result) => {
-        if (err) throw new Error(`Unable to fetch all bookings: ${err.message}`);
-        res.json({
-          status: res.statusCode,
-          result,
-        });
-      });
-    } catch (error) {
-      res.json({
-        status: 404,
-        message: error.message,
-      });
-    }
-  }
+    fetchBookings(req, res) {
+        try {
+          const strQry = `SELECT * FROM Bookings WHERE userID = ?;`;
+          const userId = req.params.userId; // Assuming you want to filter bookings by user
+      
+          db.query(strQry, [userId], (err, result) => {
+            if (err) {
+              res.status(500).json({ status: 500, message: `Unable to fetch bookings: ${err.message}` });
+            } else {
+              res.json({
+                status: 200,
+                result,
+              });
+            }
+          });
+        } catch (error) {
+          res.status(500).json({
+            status: 500,
+            message: error.message,
+          });
+        }
+      }
 
   fetchBooking(req, res) {
     try {

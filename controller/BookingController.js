@@ -7,7 +7,7 @@ const bookingRouter = express.Router();
 bookingRouter.use(bodyParser.json());
 
 // Fetch all bookings
-bookingRouter.get('/user/${userId}/bookings', (req, res) => {
+bookingRouter.get('/user/${userID}/bookings', (req, res) => {
   bookings.fetchBookings(req, res);
 });
 
