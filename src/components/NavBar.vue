@@ -48,15 +48,30 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/reachUs">Reach us</router-link>
             </li>
-
-            <li class="nav-item" 
+<!-- Based on authentication  -->
+            
+            <ul class="nav-item" v-if="!user?.value"
           
             >
-            <router-link class="nav-link" to="/login">Login</router-link>
-          </li>
-          <li class="nav-item" >
+            <router-link class="nav-link" to="/bookings" >
+              <i class="fa-solid fa-user"></i>
+            </router-link>
+            <router-link class="nav-link btn" to="/logout">
+               Logout 
+             </router-link>
+          </ul>
+        
+          <ul class="nav-item" v-else>
+            <!-- <router-link class="nav-link" to="/bookings" >
+              <i class="fa-solid fa-user"></i>
+            </router-link>
+            <button class="nav-link btn" @click="logout">
+               Logout 
+             </button> -->
+             <router-link class="nav-link" to="/login">Login</router-link>
             <router-link class="nav-link" to="/register">Sign Up</router-link>
-          </li> 
+           
+          </ul>
           </ul>
         </div>
       </div>
@@ -66,19 +81,29 @@
   <script>
   import {computed} from 'vue';
   import {useStore} from 'vuex';
-
+  // import { useRouter } from 'vue-router';
+  import {useCookies} from 'vue3-cookies';
+  const {cookies} = useCookies()
       export default {
           name : 'NavComp' ,
           setup() {
             const store = useStore();
-
-            const isAdmin =computed( () => store.state.user?.role === 'admin');
-
-            const isAuthenticated = computed( () => !store.state.user?.token)
-
+            // const router = useRouter();
+            const user =  computed(()=> store.state?.user || cookies.get('LegitUser'))  
+            const isAdmin =computed( () => !store.state.user?.role === 'admin');
+            const isAuthenticated = computed( () => !!store.state.user?.token);
+                // Debugging the authentication status
+                console.log("=========User=======");
+    console.log( user?.value);
+    //         const logout = () => {
+    //           cookies.remove('LegitUser')
+    //           router.push('/login');
+    // };
             return {
                 isAdmin, 
                 isAuthenticated,
+                // logout,
+                user
             };
           },
       };
@@ -94,6 +119,8 @@
 .NavBar{
     background-color: #d9d9d9;
 }
-
+.nav-link i {
+  margin-right: 0.5rem;
+}
   
   </style>
