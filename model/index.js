@@ -1,6 +1,6 @@
 import { Users } from "./Users.js";
 import { Sitters } from "./Sitters.js";
-import {Bookings} from "./Sitters.js"; 
+import {Bookings} from "./bookings.js"; 
 
 const users = new Users();
 const sitters = new Sitters();
