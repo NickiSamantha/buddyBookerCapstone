@@ -30,6 +30,10 @@ userRouter.post('/login', (req, res) => {
     users.login(req, res)
 })
 
+userRouter.post('/review/add', (req, res)=>{
+    users.writeReview(req, res)
+})
+
 export {
     express,
     userRouter

@@ -248,6 +248,38 @@ async login(req, res) {
         })
     }
   }
+
+  fetchReviews(req, res) {
+    try {
+        // Construct the SQL query to fetch reviews
+        const strQry = `
+            SELECT review_text AS review, rating AS rate, review_date AS date
+            FROM Reviews;
+        `;
+
+        // Execute the query
+        db.query(strQry, (err, result) => {
+            if (err) {
+                // Handle any errors that occur during the query
+                throw new Error(`Error fetching reviews: ${err.message}`);
+            }
+
+            // Send the result as JSON response
+            res.json({
+                status: res.statusCode,
+                result: result,
+            });
+        });
+    } catch (error) {
+        // Handle any errors that occur in the try block
+        res.status(400).json({
+            status: 400,
+            message: error.message,
+        });
+    }
+}
+
+
 }
 
 export {
