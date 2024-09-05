@@ -1,4 +1,5 @@
-import db from './database'; 
+import { connection as db } from "../config/index.js";
+
 class Bookings {
   fetchBookings(req, res) {
     try {
@@ -46,11 +47,11 @@ class Bookings {
       const data = req.body;
 
       const strQry = `
-        INSERT INTO Bookings (userID, date, slot, details)
+        INSERT INTO Bookings (userID, sitID, bookingDate, startTime, endTime, status,  comments )
         VALUES (?, ?, ?, ?);
       `;
 
-      db.query(strQry, [data.userID, data.date, data.slot, data.details], (err) => {
+      db.query(strQry, [data.userID, data.sitID, data.bookingDate, data.startTime , data.endTime , data.status , data.comments], (err) => {
         if (err) {
           res.json({
             status: res.statusCode,
@@ -75,11 +76,11 @@ class Bookings {
       const data = req.body;
       const strQry = `
         UPDATE Bookings
-        SET userID = ?, date = ?, slot = ?, details = ?
+        SET userID = ?, bookingDate = ?, startTime = ?, endTime = ?, comments = ?
         WHERE bookingID = ${req.params.id};
       `;
 
-      db.query(strQry, [data.userID, data.date, data.slot, data.details], (err) => {
+      db.query(strQry, [data.userID, data.sitID, data.bookingDate, data.startTime , data.endTime , data.status , data.comments], (err) => {
         if (err) throw new Error('Unable to update booking.');
         res.json({
           status: res.statusCode,
