@@ -117,5 +117,7 @@ class Bookings {
   }
 }
 
-export default Bookings;
+export {
+    Bookings
+} ;
 
