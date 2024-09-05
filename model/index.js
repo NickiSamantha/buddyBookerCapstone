@@ -4,7 +4,7 @@ import {bookings} from "./bookings.js";
 
 const users = new Users();
 const sitters = new Sitters();
-const bookings = new Bookings();
+const bookings = new bookings();
 
 export {
     users,
