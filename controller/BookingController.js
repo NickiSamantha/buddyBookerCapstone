@@ -7,7 +7,7 @@ const bookingRouter = express.Router();
 bookingRouter.use(bodyParser.json());
 
 // Fetch all bookings
-bookingRouter.get('/', (req, res) => {
+bookingRouter.get('/bookings', (req, res) => {
   bookings.fetchBookings(req, res);
 });
 
@@ -22,17 +22,17 @@ bookingRouter.post('/create', (req, res) => {
 });
 
 // Update an existing booking by ID
-bookingRouter.patch('/update/:id', (req, res) => {
+bookingRouter.patch('/bookings/update/:id', (req, res) => {
   bookings.updateBooking(req, res);
 });
 
 // Delete a booking by ID
-bookingRouter.delete('/delete/:id', (req, res) => {
+bookingRouter.delete('/bookings/delete/:id', (req, res) => {
   bookings.deleteBooking(req, res);
 });
 
 // Optionally, if you have other routes like fetching available slots
-bookingRouter.get('/slots', (req, res) => {
+bookingRouter.get('/bookings/slots', (req, res) => {
   bookings.fetchAvailableSlots(req, res);
 });
 
