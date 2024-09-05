@@ -6,7 +6,7 @@ import router from '@/router';
 import {applyToken } from '../service/AuthenticatedUser.js'
 import {useCookies} from 'vue3-cookies';
 const {cookies} = useCookies()
-
+applyToken( cookies.get('LegitUser')?.token )
 const apiURL = "https://buddybookercapstone.onrender.com/";
 
 export default createStore({
@@ -20,6 +20,7 @@ export default createStore({
     booking:null, 
     availableSlots: null,
     token: null, 
+    role: null
   },
   getters: {
   },
@@ -28,10 +29,14 @@ export default createStore({
     setUsers(state, value) {
       state.users = value;
     } , 
-    setUser(state, {message, result, token}) {
-      state.user = result;
-      state.token = token ; 
-      state.message = message; 
+    // setUser(state, {message, result, token}) {
+    //   state.user = result;
+    //   state.token = token ; 
+    //   state.message = message; 
+  
+    // },
+    setUser(state, value) {
+      state.user = value
   
     },
 
@@ -52,6 +57,12 @@ export default createStore({
     },
     setAvailableSlots(state, value) {
       state.availableSlots = value;  
+    },
+
+    //LOGOUT 
+    
+    CLEAR_USER(state) {
+      state.user = null;
     },
 
   },
@@ -328,6 +339,12 @@ export default createStore({
       // console.log(payload);
       const { message, result, token } = await (await axios.post(`${apiURL}users/login`, payload)).data
       if (result) {
+        
+          toast.success(`${message}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        
         commit('setUser', {
           message,
           result, 
@@ -336,12 +353,7 @@ export default createStore({
         cookies.set('LegitUser', { token, message, result })
         applyToken(token)
 
-        setTimeout(()=>{
-          toast.success(`${message}😎`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER
-          })
-        }, 2000)
+        
         
         router.push({name: 'home'})
       //  return {message, result};
@@ -358,8 +370,22 @@ export default createStore({
       })
     }
   },
+  //LOGOUT 
+  logout({ commit }) {
+    // Clear user from state
+    commit('CLEAR_USER');
 
+    //clear user from localStorage/sessionStorage
+    localStorage.removeItem('userToken');
+    sessionStorage.removeItem('userToken');
+
+    // redirect user after logout
+    router.push('/login'); 
   },
+},
+
+
+
   modules: {
   }
 })

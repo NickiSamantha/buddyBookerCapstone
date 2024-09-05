@@ -14,12 +14,12 @@
             />
           </template>
           <template #cardBody>
-            <h5 class="card-title fw-bold">{{ sitter.firstName }} </h5>
+            <h5 class="card-title fw-bold">{{ sitter.firstName }} {{ sitter.lastName }} </h5>
             <p class="lead">
-              {{ sitter.prodDescription }}
+              <!-- {{ sitter.reviewText}} -->
             </p>
             <p class="lead">
-              <span class="text-tertiary fw-bold">Qualification</span>: R{{
+              <span class="text-tertiary fw-bold">Qualification</span>:{{
                 sitter.qualification
               }}
             </p>
