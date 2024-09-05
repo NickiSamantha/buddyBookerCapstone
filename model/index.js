@@ -1,10 +1,10 @@
 import { Users } from "./Users.js";
 import { Sitters } from "./Sitters.js";
-import {bookings} from "./bookings.js"; 
+import {Bookings} from "./bookings.js"; 
 
 const users = new Users();
 const sitters = new Sitters();
-const bookings = new bookings();
+const bookings = new Bookings();
 
 export {
     users,
