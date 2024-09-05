@@ -115,6 +115,29 @@ class Bookings {
       });
     }
   }
+
+  fetchBookingsByUser(req, res) {
+    try {
+      const userId = req.params.userId;
+      const strQry = `
+        SELECT * FROM Bookings
+        WHERE userID = ?;
+      `;
+
+      db.query(strQry, [userId], (err, result) => {
+        if (err) throw new Error(`Unable to fetch bookings for user: ${err.message}`);
+        res.json({
+          status: res.statusCode,
+          result,
+        });
+      });
+    } catch (error) {
+      res.json({
+        status: 404,
+        message: error.message,
+      });
+    }
+  }
 }
 
 export {
