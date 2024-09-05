@@ -15,8 +15,8 @@ const createToken = (userInfo) => {
 }
 
 const verifyToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.headers["authorization"];
+    // const token = authHeader && authHeader.split(' ')[1];
     if(token){
         try {
             const decoded = verify(token, process.env.SECRET_KEY);
