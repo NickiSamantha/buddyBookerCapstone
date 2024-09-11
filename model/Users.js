@@ -65,7 +65,7 @@ class Users {
         if (err) {
           res.json({
             status: res.statusCode,
-            message: `This email has already been taken.`,
+            message: err.message,
           });
         } else {
           const token = createToken(user);
