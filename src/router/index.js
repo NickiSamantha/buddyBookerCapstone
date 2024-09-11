@@ -53,6 +53,17 @@ const routes = [
     name: 'reachUs',
     component: () => import('@/views/ReachUs.vue')
   },
+  {
+    path: '/:id/bookings',
+    name: 'bookings',
+    component: () => import('../views/BookingsView.vue') 
+
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/AdminView.vue')
+  },
 
 ]
 

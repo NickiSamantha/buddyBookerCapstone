@@ -38,13 +38,13 @@
               <router-link class="nav-link" to="/sitters">Sitters</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/bookings">Bookings</router-link>
+              <router-link class="nav-link" to="/:id/bookings">Bookings</router-link>
             </li>
-            <li class="nav-item" 
-            v-if="isAdmin"
-            >
-              <router-link class="nav-link" to="/admin">Admin</router-link>
-            </li>
+            <li class="nav-item" v-if="user?.value && user.value.role === 'admin'">
+            <router-link class="nav-link" to="/admin">
+              Admin
+            </router-link>
+          </li>
             <li class="nav-item">
               <router-link class="nav-link" to="/reachUs">Reach us</router-link>
             </li>
@@ -62,12 +62,6 @@
           </ul>
         
           <ul class="nav-item" v-else>
-            <!-- <router-link class="nav-link" to="/bookings" >
-              <i class="fa-solid fa-user"></i>
-            </router-link>
-            <button class="nav-link btn" @click="logout">
-               Logout 
-             </button> -->
              <router-link class="nav-link" to="/login">Login</router-link>
             <router-link class="nav-link" to="/register">Sign Up</router-link>
            
@@ -95,6 +89,8 @@
                 // Debugging the authentication status
                 console.log("=========User=======");
     console.log( user?.value);
+    console.log("=========isAdmin=======");
+    console.log(isAdmin.value);
     //         const logout = () => {
     //           cookies.remove('LegitUser')
     //           router.push('/login');

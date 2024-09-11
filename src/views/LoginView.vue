@@ -1,6 +1,8 @@
 <template>
-    <div class="container-fluid p-md-5 mt-md-4 mb-md-3">
-        <div class="login-container p-md-5 mt-md-5">
+    <div class="">
+        <div class="container-fluid p-md-5 mt-md-4 mb-md-3">
+        <div class="row p-5 pb-lg-5 ">
+            <div class="login-container p-md-5 mt-md-5">
             <h1 class="text-center">Login</h1>
             <form @submit.prevent="loginUser">
                 <div class="form-group">
@@ -18,7 +20,11 @@
                 No Account? <router-link to="/register">Register Here </router-link>
             </h6>
         </div>
+        </div>
+       
     </div>
+    </div>
+   
     
 </template>
 
@@ -92,6 +98,9 @@ function loginUser() {
 </script>
 
 <style scoped>
+.container-fluid{
+    background-color: #d6d6d6;
+}
 .login-container {
     max-width: 100%;
     width: 100%;
@@ -99,9 +108,9 @@ function loginUser() {
     /* Adjust as needed */
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
+    /* border: 1px solid #ddd;
+    border-radius: 5px; */
+    background-color: #d6d6d6;
     /* Ensures a good background color */
 }
 
@@ -130,7 +139,7 @@ input {
 button {
     width: 100%;
     padding: 12px;
-    background-color: #d6d6d6;
+    background-color: #ee8a8a;
     color: rgb(5, 5, 5);
     border: none;
     border-radius: 5px;
@@ -138,7 +147,7 @@ button {
 }
 
 .error {
-    color: red;
+    color: rgb(7, 7, 7);
     font-size: 0.875rem;
     /* Smaller font size for error messages */
 }

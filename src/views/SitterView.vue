@@ -1,5 +1,5 @@
 <template>
-    <div class="container vh-100">
+    <div class="container-fluid">
       <div class="row">
         <h2 class="display-2">Sitter Details</h2>
       </div>
@@ -16,13 +16,26 @@
           <template #cardBody>
             <h5 class="card-title fw-bold">{{ sitter.firstName }} {{ sitter.lastName }} </h5>
             <p class="lead">
-              <!-- {{ sitter.reviewText}} -->
             </p>
             <p class="lead">
               <span class="text-tertiary fw-bold">Qualification</span>:{{
                 sitter.qualification
               }}
             </p>
+            <p class="lead">
+              <span class="text-tertiary fw-bold">Availability</span> : {{ sitter.dayOfWeek }}
+              {{ sitter.startTime }} {{ sitter.endTime }}
+
+            </p>
+            <p class="lead">
+              <span class="text-tertiary fw-bold"> Review</span> : {{ sitter.Reviews }}
+
+            </p>
+            <div class="button-wrapper">
+ <button @click="addToCart(sitter)">
+Book Now
+ </button>
+            </div>
           </template>
         </CardComp>
       </div>
@@ -41,9 +54,14 @@ import { useRoute } from "vue-router";
   const store = useStore();
   const route = useRoute();
   const sitter = computed(() => store.state.sitter);
+
+  const addToCart = (game) => {
+    store.dispatch('toCart', game)
+  }
   onMounted(() => {
     store.dispatch("fetchSitter", route.params.id)
   });
+
   </script>
   
   <style scoped>
@@ -55,5 +73,8 @@ import { useRoute } from "vue-router";
   
   .card {
     transition: all 0.3s ease-in-out;
+  }
+  .container-fluid {
+    background-color: #d6d6d6;
   }
   </style>

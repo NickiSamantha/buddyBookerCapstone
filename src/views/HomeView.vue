@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="hero"
       data-aos="fade-right"
@@ -69,7 +69,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.container{
+.container-fluid{
   background-color: #d9d9d9;
 }
 </style>

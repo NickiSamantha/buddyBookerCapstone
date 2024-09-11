@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <h2 class="display-2">Our Sitters</h2>
       </div>

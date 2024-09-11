@@ -85,7 +85,7 @@
   export default {
     data() {
       return {
-        email: '',
+        emailAdd : '',
         pwd: '',
         firstName: '',
         lastName: '',
@@ -99,7 +99,7 @@
       async handleSubmit() {
         try {
           const response = await axios.post('/register', {
-            emailAdd: this.email,
+            emailAdd: this.emailAdd,
             pwd: this.pwd,
             firstName: this.firstName,
             lastName: this.lastName,
