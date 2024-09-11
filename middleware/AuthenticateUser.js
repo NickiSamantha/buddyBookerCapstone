@@ -7,7 +7,8 @@ const createToken = (userInfo) => {
     return sign(
         {
             emailAdd: userInfo.emailAdd,
-            pwd: userInfo.pwd
+            pwd: userInfo.pwd,
+            role: userInfo.role 
         },
         process.env.SECRET_KEY,
         {expiresIn: '1h'} 
@@ -21,6 +22,7 @@ const verifyToken = (req, res, next) => {
         try {
             const decoded = verify(token, process.env.SECRET_KEY);
             req.user = decoded; 
+            store.commit('setUserRole', decoded.role);
             next();
         } catch (err) {
             res.status(403).json({
