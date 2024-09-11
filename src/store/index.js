@@ -107,9 +107,10 @@ setUserID(state, userID) {
     //Users
     async fetchUsers(context) {
       try {
-        const { results, msg } = await (await axios.get(`${apiURL}users`)).data
-        if (results) {
-          context.commit('setUsers', results)
+        const { result, msg } = await (await axios.get(`${apiURL}users`)).data
+        console.log(result);
+        if (result) {
+          context.commit('setUsers', result)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -141,29 +142,30 @@ setUserID(state, userID) {
         })
       }
     },
-    // async register(context, payload) {
-    //   try {
-    //     const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
-    //     if (token) {
-    //       context.dispatch('fetchUsers')
-    //       toast.success(`${msg}`, {
-    //         autoClose: 2000,
-    //         position: toast.POSITION.BOTTOM_CENTER
-    //       })
-    //       router.push({ name: 'login' })
-    //     } else {
-    //       toast.error(`${err}`, {
-    //         autoClose: 2000,
-    //         position: toast.POSITION.BOTTOM_CENTER
-    //       })
-    //     }
-    //   } catch (e) {
-    //     toast.error(`${e.message}`, {
-    //       autoClose: 2000,
-    //       position: toast.POSITION.BOTTOM_CENTER
-    //     })
-    //   }
-    // },
+    async register(context, payload) {
+      try {
+        const { message, token } = await (await axios.post(`${apiURL}users/register`, payload)).data
+        console.log(message, token);
+        if (token) {
+          context.dispatch('fetchUsers')
+          toast.success(`${message}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+          router.push({ name: 'login' })
+        } else {
+          toast.error(`${message}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
     async updateUser(context, payload) {
       try {
         const { msg, err } = await (await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data

@@ -20,26 +20,22 @@
   the best.  </span>
 </ul> 
 
-<ul> 
+<ul class="features"> 
   Real-Time Availability: 
   <span> See when your preferred sitter is available and book instantly.</span>
 </ul> 
-<ul>
+<ul class="features">
   Custom Profiles: 
   <span> Detailed profiles and reviews help you find a sitter that suits your family's unique needs. 
   </span>
 </ul>
 
-<ul>
+<ul class="features">
   Easy Booking: 
   <span>
     Schedule, manage, and modify bookings with just a few clicks.
-
   </span>
 </ul>
-     
-   
-   
       <p>  
       Whether you need a night out or regular help, BuddyBooker is here to make
       sure your little ones are in safe, caring hands. Discover the convenience
@@ -50,26 +46,21 @@
 
 <style>
 .about{
-  background-color: #f75e66;
+  background-color: #d6d6d6;
 }
 .text {
   
   padding : 20px ;
   margin: 20px;
 }
-/* body{
-  font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            margin: 20px;
-     } */
+
 .text {
   text-align: center;
 }
 
         h1 {
             text-align: center;
-            color: #2c3e50;
+        
             font-size: 2.5em;
             margin-top: 20px;
         }

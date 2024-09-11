@@ -4,6 +4,11 @@
         <h2 class="display-2">Sitter Details</h2>
       </div>
       <div class="row justify-content-center mt-5" v-if="sitter">
+        <div class="row mb-3">
+        <router-link to="/sitters" class="back-button">
+          &larr; Go Back
+        </router-link>
+      </div>
         <CardComp>
           <template #cardHeader>
             <img
@@ -32,7 +37,7 @@
 
             </p>
             <div class="button-wrapper">
- <button @click="addToCart(sitter)">
+ <button class="cute-button" @click="addToCart(sitter)">
 Book Now
  </button>
             </div>
@@ -77,4 +82,50 @@ import { useRoute } from "vue-router";
   .container-fluid {
     background-color: #d6d6d6;
   }
+  .cute-button {
+    background-color: #000000; /* Pink color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    border-radius: 15px; 
+    cursor: pointer;
+    transition: all 0.3s ease;  
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.cute-button:hover {
+    background-color: #363435;  
+    transform: scale(1.05); 
+}
+
+.cute-button:active {
+    background-color: #4d4b4b; 
+    transform: scale(0.95); 
+}
+
+.back-button {
+  background-color: #101110; 
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.back-button:hover {
+  background-color: #626763; /* Slightly darker green for hover effect */
+}
+
+.back-button:active {
+  background-color: #949694; /* Even darker green for active state */
+  transform: scale(0.95); /* Slightly shrink the button on click */
+}
   </style>

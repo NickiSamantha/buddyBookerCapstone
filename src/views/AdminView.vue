@@ -131,7 +131,7 @@
               <td>{{ sitter.firstName }}</td>
               <td>{{ sitter.lastName }}</td>
               <td >
-{{ sitter.qualification }}
+                 {{ sitter.qualification }}
               </td>
               <td >
                 <img
@@ -325,7 +325,7 @@
                       placeholder="Enter your address"
                       required
                     />
-                    <select v-model="newUser.userRole" 
+                    <select v-model="newUser.role" 
                     placeholder="Select your role" required>
                       <option value="user">user</option>
                       <option value="admin">admin</option>
@@ -340,7 +340,7 @@
                       >
                         Close
                       </button>
-                      <input type="submit" class="" @click="createUser" />
+                      <input type="submit" class="" @click.prevent="addUser" />
                     </div>
                   </form>
                 </div>
@@ -436,7 +436,7 @@
                             placeholder="Address"
                             required
                           />
-                          <select v-model="user.userRole" required>
+                          <select v-model="user.role" required>
                             <option value="user">user</option>
                             <option value="admin">admin</option>
                           </select>
@@ -493,7 +493,7 @@ export default {
         emailAdd: "",
         pwd: "",
         address:"",
-        userRole: "",
+        role: "",
         
       },
     };
@@ -506,7 +506,7 @@ export default {
     ...mapActions([
       "fetchUsers",
       "fetchSitters",
-      "addUser",
+      "register",
       "addSitter",
       "editUser",
       "editSitter",
@@ -550,9 +550,9 @@ export default {
         });
       }
     },
-    async addUser() {
+     addUser() {
       try {
-        await this.addUser(this.newUser);
+         this.register(this.newUser);
         this.newUser = {
           firstName: "",
           lastName: "",
@@ -648,22 +648,22 @@ h2 {
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 1000;
   overflow-y: auto;
-  & img {
+}
+.floatingDisplay img {
     width: 38rem;
     max-width: 100%;
   }
-}
 a {
   background: #818181;
   transition: background 0.3s, color 0.3s;
   /*   &:focus {
       border: 2px solid #E9E9E9;
     } */
-  &:hover {
+}
+a:hover {
     background: #181818;
     color: #e9e9e9;
   }
-}
 
 .extraPadding {
   padding-inline: 2rem;

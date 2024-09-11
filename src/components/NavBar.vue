@@ -40,7 +40,8 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/:id/bookings">Bookings</router-link>
             </li>
-            <li class="nav-item" v-if="user?.value && user.value.role === 'admin'">
+            <li class="nav-item" >
+              
             <router-link class="nav-link" to="/admin">
               Admin
             </router-link>
@@ -49,17 +50,18 @@
               <router-link class="nav-link" to="/reachUs">Reach us</router-link>
             </li>
 <!-- Based on authentication  -->
-            
-            <ul class="nav-item" v-if="!user?.value"
-          
-            >
-            <router-link class="nav-link" to="/bookings" >
+            <ul class="nav-item" v-if="!user?.value">
+              <router-link class="nav-link" to="/:id/bookings" >
               <i class="fa-solid fa-user"></i>
             </router-link>
+            </ul>
+            <ul class="nav-item" v-if="!user?.value">
+            
             <router-link class="nav-link btn" to="/logout">
                Logout 
              </router-link>
           </ul>
+          
         
           <ul class="nav-item" v-else>
              <router-link class="nav-link" to="/login">Login</router-link>
@@ -73,7 +75,7 @@
   </template>
   
   <script>
-  import {computed} from 'vue';
+  import {computed, ref, watch} from 'vue';
   import {useStore} from 'vuex';
   // import { useRouter } from 'vue-router';
   import {useCookies} from 'vue3-cookies';
@@ -83,9 +85,11 @@
           setup() {
             const store = useStore();
             // const router = useRouter();
-            const user =  computed(()=> store.state?.user || cookies.get('LegitUser'))  
-            const isAdmin =computed( () => !store.state.user?.role === 'admin');
-            const isAuthenticated = computed( () => !!store.state.user?.token);
+            const loading = ref(true)
+
+          const user = computed(() => store.state?.user || cookies.get('LegitUser'));
+          const isAdmin = computed(() => user?.value && user.value.result.role === 'admin');          
+          const isAuthenticated = computed( () => !!store.state.user?.token);
                 // Debugging the authentication status
                 console.log("=========User=======");
     console.log( user?.value);
@@ -95,6 +99,11 @@
     //           cookies.remove('LegitUser')
     //           router.push('/login');
     // };
+    watch(user, () => {
+      if (user.value) {
+        loading.value = false ; 
+      }
+    })
             return {
                 isAdmin, 
                 isAuthenticated,
