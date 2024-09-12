@@ -40,7 +40,7 @@
             <li class="nav-item">
               <router-link class="nav-link" to="/:id/bookings">Bookings</router-link>
             </li>
-            <li class="nav-item" >
+            <li class="nav-item" v-if="isAdmin">
               
             <router-link class="nav-link" to="/admin">
               Admin
@@ -50,24 +50,24 @@
               <router-link class="nav-link" to="/reachUs">Reach us</router-link>
             </li>
 <!-- Based on authentication  -->
-            <ul class="nav-item" v-if="!user?.value">
-              <router-link class="nav-link" to="/:id/bookings" >
+<li class="nav-item" v-if="isAuthenticated">
+            <router-link class="nav-link" to="/bookings">
               <i class="fa-solid fa-user"></i>
             </router-link>
-            </ul>
-            <ul class="nav-item" v-if="!user?.value">
-            
+          </li>
+
+          <li class="nav-item" v-if="isAuthenticated">
             <router-link class="nav-link btn" to="/logout">
-               Logout 
-             </router-link>
-          </ul>
-          
-        
-          <ul class="nav-item" v-else>
-             <router-link class="nav-link" to="/login">Login</router-link>
-            <router-link class="nav-link" to="/register">Sign Up</router-link>
-           
-          </ul>
+              Logout
+            </router-link>
+          </li>
+         <!-- Login button visible only when not authenticated -->
+         <li class="nav-item" v-if="!isAuthenticated">
+            <router-link class="nav-link btn" to="/login">
+              Login
+            </router-link>
+          </li>
+       
           </ul>
         </div>
       </div>
@@ -88,11 +88,11 @@
             const loading = ref(true)
 
           const user = computed(() => store.state?.user || cookies.get('LegitUser'));
-          const isAdmin = computed(() => user?.value && user.value.result.role === 'admin');          
-          const isAuthenticated = computed( () => !!store.state.user?.token);
+          const isAdmin = computed(() => user?.value?.result?.role === 'admin');
+          const isAuthenticated = computed(() => !!store.state.user?.token);
                 // Debugging the authentication status
                 console.log("=========User=======");
-    console.log( user?.value);
+    console.log(user?.value);
     console.log("=========isAdmin=======");
     console.log(isAdmin.value);
     //         const logout = () => {
