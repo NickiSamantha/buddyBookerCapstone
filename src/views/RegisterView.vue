@@ -1,119 +1,133 @@
 <template>
-    <div class="register">
-      <h2>Register</h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            v-model="email"
-            required
-            placeholder="Enter your email"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            v-model="pwd"
-            required
-            placeholder="Enter your password"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            v-model="firstName"
-            required
-            placeholder="Enter your first name"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="lastName">Last Name</label>
-          <input
-            type="text"
-            id="lastName"
-            v-model="lastName"
-            required
-            placeholder="Enter your last name"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            v-model="address"
-            required
-            placeholder="Enter your address"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label for="role">Role</label>
-          <select
-            id="role"
-            v-model="role"
-            required
-          >
-            <option disabled value="">Select your role</option>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-  
-        <button type="submit">Register</button>
-      </form>
-  
-      <div v-if="message" class="message" :class="{'success': isSuccess, 'error': !isSuccess}">
-        {{ message }}
+    <!-- Registration Form -->
+<section id="register">
+  <div class="container">
+    <h1 class="fs-4">Register New User</h1>
+    <form @submit.prevent="addUser"> <!-- Form element with submit handler -->
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          v-model="newUser.firstName"
+          class="form-control"
+          placeholder="First Name"
+          required
+        />
       </div>
-    </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input
+          type="text"
+          id="lastName"
+          v-model="newUser.lastName"
+          class="form-control"
+          placeholder="Last Name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="emailAdd" class="form-label">Email Address</label>
+        <input
+          type="email"
+          id="emailAdd"
+          v-model="newUser.emailAdd"
+          class="form-control"
+          placeholder="Email Address"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="pwd" class="form-label">Password</label>
+        <input
+          type="password"
+          id="pwd"
+          v-model="newUser.pwd"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input
+          type="text"
+          id="address"
+          v-model="newUser.address"
+          class="form-control"
+          placeholder="Enter your address"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" v-model="newUser.role" class="form-select" required>
+          <option value="" disabled>Select your role</option>
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</section>
   </template>
   
   <script>
-  import axios from 'axios';
-  
+  import { mapState, mapActions } from "vuex";
+  import { toast } from "vue3-toastify";
+  // import { register } from 'register-service-worker';
   export default {
     data() {
       return {
-        emailAdd : '',
-        pwd: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        role: '',
-        message: '',
-        isSuccess: false,
+        newUser: {
+          firstName: "",
+          lastName: "",
+          emailAdd: "",
+          pwd: "",
+          address:"",
+          role: "",
+          
+        },
       };
     },
+    components: {},
+    computed: {
+      ...mapState(["users"]),
+    },
     methods: {
-      async handleSubmit() {
+      ...mapActions([
+      
+        "register",
+       
+      ]),
+   
+       addUser() {
         try {
-          const response = await axios.post('/register', {
-            emailAdd: this.emailAdd,
-            pwd: this.pwd,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            address: this.address,
-            role: this.role,
+           this.register(this.newUser);
+          this.newUser = {
+            firstName: "",
+            lastName: "",
+            address: "",
+            role: "",
+            emailAdd: "",
+            pwd: "",
+          };
+        } catch (e) {
+          toast.error(`${e.message}`, {
+            autoClose: 2000,
+            position: "bottom-center",
           });
-  
-          this.message = response.data.message;
-          this.isSuccess = response.data.status === 200;
-        } catch (error) {
-          this.message = error.response?.data?.message || 'An error occurred.';
-          this.isSuccess = false;
         }
       },
+  
+     
+    },
+    mounted() {
+      this.$store.dispatch("fetchUsers");
+
     },
   };
   </script>

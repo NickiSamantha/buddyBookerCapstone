@@ -1,32 +1,32 @@
 <template>
-    <div class="container ">
-     <div class="row d-flex mx-auto justify-content-center mb-4 ">
+    <div class="container-fluid ">
+     <div class="row text-center ">
          <h2 class="display-2">Get in touch with us!</h2>
          <p class="text-center"> Your feedback is important to us, and we look forward to working with you!  </p>
      </div>
      <div >
      </div>
      <div class="col-md-6 m-auto p-2">
-     <form  id="contactForm" action="https://formspree.io/f/manwpnbk"
+     <form  id="contactForm" action="https://formspree.io/f/xeojwaqv"
        method="POST" target="_blank">
          <div class="mb-3">
              <label for="name" class="form-label" >Full Name</label>
-             <input type="text" class="form-control" id="name" placeholder="Enter Full Name" required>
+             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Full Name" required>
          </div>
          <div class="mb-3">
              <label for="email" class="form-label" >Email address</label>
-             <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
+             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
          </div>
          <div class="mb-3">
              <label for="message" class="form-label">Feedback</label>
-             <textarea class="form-control" id="message" rows="3" 
+             <textarea class="form-control" id="message" name="message" rows="3" 
              placeholder="Have a review to submit for one of our sitters ? Leave that here ! 
              Have some tips for improvement , leave that here ! " 
              required></textarea>
 
          </div>
-         <button type="submit" class="btn btn-dark mb-3">Submit</button>
-         <button type="reset" class="btn btn-light mb-3" id="clearBtn">Clear</button>
+         <button type="submit" class="btn btn-dark mb-3 ">Submit</button>
+         <button type="reset" class="btn btn-light mb-3 " id="clearBtn">Clear</button>
 
         </form>
  </div>
@@ -39,9 +39,19 @@
      
      <h5 class="mb-2"><strong>Follow Us :</strong> </h5>
       <ul class="social-icons">
-       <li><a href="https://www.instagram.com/pretty_simple_printz/" class="btn btn-light" target="_blank"><i
+       <li><a href="https://www.instagram.com/pretty_simple_printz/" 
+        class="btn btn-light" target="_blank"><i
              class="fab fa-instagram"></i></a></li>
-       <li><a href="https://www.tiktok.com/@prettysimpleprintz" class="btn btn-light" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>  
+       <li><a href="https://www.tiktok.com/@prettysimpleprintz" 
+        class="btn btn-light" target="_blank">
+        <i class="fa-brands fa-tiktok"></i></a></li>  
+        <li><a href="https://www.facebook.com"
+            class="btn btn-light" target="_blank">
+        <i class="fa-brands fa-facebook"></i>
+        </a>
+
+
+        </li>
       </ul>
 </div>
    </div>
@@ -66,7 +76,7 @@ text-decoration: none;
 }
 
 .btn:hover {
-background-color: #e5c2ad;
+background-color: #a4a09d;
 color: white;
 }
 .button-group {
@@ -98,5 +108,10 @@ justify-content: space-between;
  margin-right: 0.625;
 
 }
+.container{
+    background-color: #d6d6d6;
+}
+
+
 
 </style>

@@ -1,6 +1,12 @@
-<template class="">
+<template>
   <div class="about p-5">
-    <h1>About BuddyBooker</h1>
+    <div class="text-center"
+    data-aos="fade-right"
+        data-aos-duration="1900"
+        data-aos-delay="400">
+
+    
+    <h1 class="">About BuddyBooker</h1>
 
     <p>
       Welcome to BuddyBooker, where finding the perfect babysitter is made
@@ -11,27 +17,27 @@
       professionals who match your needs. </p>
       
       <div class="text">
-      Key Features:
+        <h3><strong>Key Features:</strong></h3>
     </div>
 
 <ul class="features">
-  Verified Sitters:
+  <strong> Sitters: </strong> 
 <span> Comprehensive background checks and references ensure you're choosing from
   the best.  </span>
 </ul> 
 
 <ul class="features"> 
-  Real-Time Availability: 
+  <strong>  Availability:  </strong>
   <span> See when your preferred sitter is available and book instantly.</span>
 </ul> 
 <ul class="features">
-  Custom Profiles: 
+  <strong> Custom Profiles:  </strong>
   <span> Detailed profiles and reviews help you find a sitter that suits your family's unique needs. 
   </span>
 </ul>
 
 <ul class="features">
-  Easy Booking: 
+  <strong>  Easy Booking: </strong>
   <span>
     Schedule, manage, and modify bookings with just a few clicks.
   </span>
@@ -41,12 +47,12 @@
       sure your little ones are in safe, caring hands. Discover the convenience
       and reliability of BuddyBooker today!
     </p>
-  </div>
+  </div></div>
 </template>
 
-<style>
+<style scoped>
 .about{
-  background-color: #d6d6d6;
+  background-color: #74afca;
 }
 .text {
   
@@ -58,10 +64,10 @@
   text-align: center;
 }
 
-        h1 {
-            text-align: center;
+h1 {
+text-align: center;
         
-            font-size: 2.5em;
+font-size: 2.5em;
             margin-top: 20px;
         }
         
@@ -81,6 +87,37 @@
         }
         .features span {
             font-weight: normal;
-            color: #555;
+            color: #0a0a0a;
         }
+
+
+ /* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  .text {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  p {
+    margin: 5px;
+    padding: 0 5px;
+  }
+
+  .features {
+    margin: 15px 0;
+  }
+
+  .features li {
+    margin-bottom: 8px;
+  }
+
+  .shadow {
+    padding: 8px;
+    margin: 10px;
+  }
+}
 </style>

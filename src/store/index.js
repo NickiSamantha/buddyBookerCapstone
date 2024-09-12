@@ -202,86 +202,6 @@ setUserID(state, userID) {
         })
       }
     },
-    // Fetch all bookings
-  // async fetchBookings(context) {
-  //   try {
-  //     const {results} = await axios.get(`${apiURL}:id/bookings`);
-  //     context.commit("setBookings", results.data);
-  //   } catch (e) {
-  //     toast.error(`${e.message}`, {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   }
-  // },
-
-  // Fetch a single booking by ID
-  // async fetchBooking(context, bookingID) {
-  //   try {
-  //     const {result} = await axios.get(`${apiURL}users/:id/bookings/${bookingID}`);
-  //     context.commit("setBookings", result.data);
-  //   } catch (e) {
-  //     toast.error(`${e.message}`, {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   }
-  // },
-
-  // Create a new booking
-  // async createBooking(context, 
-  //   payload
-
-  // ) {
-  //   try {
-  //     const result = await axios.post(`${apiURL}/users/:id/booking`, payload);
-  //     console.log(result.data);
-
-  //     const bookingDetails = result.data;
-
-  //     //context.dispatch("fetchBookings");  // Refresh the booking list after creation
-  //     toast.success("Booking created successfully!", {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //     context.commit('setBooking', bookingDetails);
-  //   } catch (e) {
-  //     toast.error(`${e.message}`, {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   }
-  // },
-
-  // Fetch available booking slots
-  // async fetchAvailableSlots(context, date) {
-  //   try {
-  //     const result = await axios.get(`${apiURL}bookings/slots?date=${date}`);
-  //     context.commit("setAvailableSlots", result.data);
-  //   } catch (e) {
-  //     toast.error(`${e.message}`, {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   }
-  // },
-
-  // Cancel a booking
-  // async cancelBooking(context, bookingID) {
-  //   try {
-  //     await axios.delete(`${apiURL}bookings/${bookingID}`);
-  //     context.dispatch("fetchBookings");  // Refresh the booking list after cancellation
-  //     toast.success("Booking cancelled successfully!", {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   } catch (e) {
-  //     toast.error(`${e.message}`, {
-  //       autoClose: 2000,
-  //       position: toast.POSITION.BOTTOM_CENTER,
-  //     });
-  //   }
-  // },
 
   //SITTERS
   async fetchSitters(context) {
@@ -393,7 +313,7 @@ setUserID(state, userID) {
         applyToken(token)
 
         // Fetch and set user bookings
-        const bookings = result.bookings || []; // Assuming result contains bookings
+        const bookings = result.bookings || []; 
         commit('updateUserBookings', bookings);
   
         

@@ -2,13 +2,26 @@
   <div class="container-fluid section">
     <div class="container">
       <h2 class="text-center  pt-2">Admin</h2>
+      <!-- Bootstrap tabs  -->
+      <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="sitters-tab" data-bs-toggle="tab" href="#sitters" role="tab" aria-controls="sitters" aria-selected="true">Sitters</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="users-tab" data-bs-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
+        </li>
+      </ul> -->
+<!-- Bootstrap Tabs Content -->
+<div class="tab-content" id="myTabContent">
+<!-- <div class="tab-pane fade show active" id="sitters" role="tabpanel" aria-labelledby="sitters-tab"> -->
+         
       <div class="row table-responsive">
         <div class="row justify-content-between">
           <h2>
             <span>
               <button
                 type="button"
-                class="addbtn rounded-1"
+                class="addbtn rounded-1 m-3"
                 data-bs-toggle="modal"
                 data-bs-target="#products"
               >
@@ -17,6 +30,7 @@
             </span>
             Sitters
           </h2>
+          <!-- Add sitter Modal -->
           <div
             class="modal fade"
             id="products"
@@ -137,7 +151,7 @@
                 <img
               :src="sitter.imageURL"
               loading="lazy"
-              class="img-fluid"
+              class="img-fluid img"
               :alt="sitter.firstName"
             />
               </td>
@@ -158,7 +172,7 @@
                   :data-bs-target="`#editP${sitter.sitID}`"
                 > Edit </button>
 
-                <!-- Modal -->
+                <!-- Edit Sitter Modal -->
                 <div
                   class="modal fade"
                   :id="`editP${sitter.sitID}`"
@@ -182,7 +196,7 @@
                           class="btn-close"
                           data-bs-dismiss="modal"
                           aria-label="Close"
-                        ></button>
+                        > Close</button>
                       </div>
                       <div class="modal-body">
                         <form>
@@ -205,8 +219,10 @@
                             required
                           />
                           <input
-                            type="text"
+                            type="image"
+                            class="img"
                             v-model="sitter.imageURL"
+                            
                             placeholder="Image"
                             required
                           />
@@ -258,13 +274,18 @@
           </tbody>
         </table>
       </div>
+      </div>
+      <!-- User Tab -->
+
+      <!-- <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab"> -->
+         
       <div class="row table-responsive">
         <div class="row justify-content-between">
           <h2>
             <span>
               <button
                 type="button"
-                class="addbtn rounded-1"
+                class="addbtn rounded-1 m-3 text-center"
                 data-bs-toggle="modal"
                 data-bs-target="#users"
               >
@@ -273,6 +294,8 @@
             </span>
             Users
           </h2>
+          <!-- Add User Modal -->
+
           <div
             class="modal fade"
             id="users"
@@ -340,7 +363,7 @@
                       >
                         Close
                       </button>
-                      <input type="submit" class="" @click.prevent="addUser" />
+                      <button type="button" class="" @click.prevent="addUser" > Submit</button>
                     </div>
                   </form>
                 </div>
@@ -374,14 +397,15 @@
                   type="button"
                   class="functionbtn bi bi-trash rounded-1"
                   @click="deleteUser(user.userID)"
-                ></button>
+                > Delete </button>
                 <button
                   type="button"
                   class="functionbtn bi bi-pen rounded-1"
                   data-bs-toggle="modal"
                   :data-bs-target="`#edit${user.userID}`"
-                ></button>
-                <!-- Modal -->
+                >Edit</button>
+
+                <!--Edit User Modal -->
                 <div
                   class="modal fade"
                   :id="`edit${user.userID}`"
@@ -402,10 +426,11 @@
                           class="btn-close"
                           data-bs-dismiss="modal"
                           aria-label="Close"
-                        ></button>
+                        >Close</button>
                       </div>
                       <div class="modal-body">
                         <form>
+                         
                           <input
                             type="text"
                             v-model="user.firstName"
@@ -419,7 +444,7 @@
                             required
                           />
                           <input
-                            type="email"
+                            type="text"
                             v-model="user.emailAdd"
                             placeholder="Email"
                             required
@@ -431,7 +456,7 @@
                             required
                           />
                           <input
-                            type="address"
+                            type="text"
                             v-model="user.address"
                             placeholder="Address"
                             required
@@ -467,8 +492,11 @@
           </tbody>
         </table>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
+  </div>
+<!-- </div> -->
+
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
@@ -627,6 +655,9 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 * {
   color: #070707;
 }
@@ -649,7 +680,7 @@ h2 {
   z-index: 1000;
   overflow-y: auto;
 }
-.floatingDisplay img {
+.img {
     width: 38rem;
     max-width: 100%;
   }
@@ -675,9 +706,7 @@ select {
   justify-content: center;
   
   padding-inline: 1rem;
-  &:focus {
-    outline: none;
-  }
+
 }
 .closeModal {
   height: 1.8rem;
@@ -686,9 +715,7 @@ select {
   justify-content: center;
   background-color: #b9beb3;
   width: 100%;
-  &:focus {
-    outline: none;
-  }
+
 }
 .modal-footer {
   padding-inline: 0;
@@ -699,28 +726,18 @@ form,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  & * {
-    width: 30rem;
-    max-width: 90%;
-  }
+
 }
 .addbtn {
   width: 3rem;
   background: #818181;
   transition: background 0.4s, color 0.3s;
-  &:hover {
-    background: #e9e9e9;
-    color: #818181;
-  }
+
 }
 .functionbtn {
   background: #818181;
   transition: background 0.4s, color 0.3s;
   margin: 0.2rem;
-  &:hover {
-    background: #e9e9e9;
-    color: #818181;
-  }
 }
 .table,
 th {
