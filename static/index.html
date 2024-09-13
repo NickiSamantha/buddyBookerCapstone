@@ -7,5 +7,112 @@
 </head>
 <body>
     <h3>BuddyBooker Sitters</h3>
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+        <table border="1">
+            <th colspan="3">USER INFORMATION</th>
+            <thead>
+                <th>HTTP Method</th>
+                <th>Path</th>
+                <th>Description</th>
+            </thead>
+            <tbody>
+                <!-- USER INFO -->
+                <tr>
+                    <td>GET</td>
+                    <td>/users</td>
+                    <td>Gets all users</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/users/:id</td>
+                    <td>Gets a single user by id</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/users/register</td>
+                    <td>Adds a new user</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>/users/update/:id</td>
+                    <td>Edit a user's information by id</td>
+                </tr>
+
+                <tr>
+                    <td>POST LOGIN</td>
+                    <td>/users/login</td>
+                    <td>User login</td>
+                </tr>
+
+                <tr>
+                    <td>DELETE</td>
+                    <td>/users/delete/:id</td>
+                    <td>Removes a user by id</td>
+                </tr>
+                <th colspan="3">SITTER INFORMATION</th>
+                <!-- SITTER INFO  -->
+                <tr>
+                    <td>GET</td>
+                    <td>/sitters</td>
+                    <td>Gets all sitters</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/sitters/:id</td>
+                    <td>Gets a single sitter by id</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/sitters/addSitter</td>
+                    <td>Adds a new product</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>/sitters/update/:id</td>
+                    <td>Edit a sitters information by id</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/sitters/delete/:id</td>
+                    <td>Removes a product by id</td>
+                </tr>
+                <!-- BOOKING INFORMATION -->
+                <th colspan="3">BOOKING INFORMATION</th>
+                
+                <tr>
+                    <td>GET</td>
+                    <td>users/:id/bookings</td>
+                    <td>Gets all bookings</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/users/:id/booking/:bid</td>
+                    <td>Gets a single booking by id</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/users/:id/booking</td>
+                    <td>Creates a booking</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>/users/:id/booking/:bookingID</td>
+                    <td>Delete a single booking</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/users/:id/bookings</td>
+                    <td>Removes all bookings</td>
+                </tr>
+                <!-- ADMIN INFORMATION  -->
+                <th colspan="3">ADMIN INFORMATION</th>
+                <tr>
+                    <td>GET</td>
+                    <td>users/bookings</td>
+                    <td>Gets all bookings</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
