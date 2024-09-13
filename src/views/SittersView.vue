@@ -83,8 +83,8 @@
        
       </div>
       <div v-else>
-        <p class="text-center">No products found</p>
-      </div>
+     <Spinner/>
+    </div>
     </div>
     </div>
   </template>

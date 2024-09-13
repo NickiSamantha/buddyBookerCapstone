@@ -51,13 +51,13 @@
             </li>
 <!-- Based on authentication  -->
 <li class="nav-item" v-if="isAuthenticated">
-            <router-link class="nav-link" to="/bookings">
+            <router-link class="nav-link" to="/profile">
               <i class="fa-solid fa-user"></i>
             </router-link>
           </li>
 
           <li class="nav-item" v-if="isAuthenticated">
-            <router-link class="nav-link btn" to="/logout">
+            <router-link @click="logout()" class="nav-link btn" to="/logout">
               Logout
             </router-link>
           </li>
@@ -95,10 +95,12 @@
     console.log(user?.value);
     console.log("=========isAdmin=======");
     console.log(isAdmin.value);
-    //         const logout = () => {
-    //           cookies.remove('LegitUser')
-    //           router.push('/login');
-    // };
+            const logout = async () => {
+               cookies.remove('LegitUser')
+              location.reload()
+      window.location.href = '/login'; 
+              // router.push('/login');
+    };
     watch(user, () => {
       if (user.value) {
         loading.value = false ; 
@@ -107,7 +109,7 @@
             return {
                 isAdmin, 
                 isAuthenticated,
-                // logout,
+                logout,
                 user
             };
           },

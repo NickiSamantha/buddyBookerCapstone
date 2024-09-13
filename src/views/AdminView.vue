@@ -407,6 +407,7 @@
 
                 <!--Edit User Modal -->
                 <div
+                
                   class="modal fade"
                   :id="`edit${user.userID}`"
                   data-bs-backdrop="static"
@@ -426,7 +427,7 @@
                           class="btn-close"
                           data-bs-dismiss="modal"
                           aria-label="Close"
-                        >Close</button>
+                        ></button>
                       </div>
                       <div class="modal-body">
                         <form>

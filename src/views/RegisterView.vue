@@ -165,14 +165,15 @@
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 4px;
-    background-color: #28a745;
+    background-color: #474f49;
     color: #fff;
     cursor: pointer;
     font-size: 1rem;
   }
   
   button:hover {
-    background-color: #218838;
+    background-color: #ceec92;
+    color: black;
   }
   
   .message {
@@ -182,8 +183,8 @@
   }
   
   .success {
-    color: green;
-    border: 1px solid green;
+    color: rgb(97, 99, 97);
+    border: 1px solid rgb(178, 194, 178);
   }
   
   .error {

@@ -1,6 +1,5 @@
 <template>
-    <div class="">
-        <div class="container-fluid p-md-5 mt-md-4 mb-md-3">
+        <div class="container">
         <div class="row p-5 pb-lg-5 ">
             <div class="login-container p-md-5 mt-md-5">
             <h1 class="text-center">Login</h1>
@@ -20,19 +19,15 @@
                 No Account? <router-link to="/register">Register Here </router-link>
             </h6>
         </div>
-        </div>
-       
+        </div>  
     </div>
-    </div>
-   
-    
 </template>
 
 <script setup>
 import { reactive } from 'vue'
 import { useStore } from 'vuex';
 const store = useStore();
-// import { useRouter } from 'vue-router';
+
 const payload = reactive({
     emailAdd: "",
     pwd: ""
@@ -40,83 +35,25 @@ const payload = reactive({
 function loginUser() {
     store.dispatch('login', payload)
 }
-// export default {
-//   data() {
-//     return {
-//       emailAdd: '',
-//       pwd: '',
-//       errorMessage: ''
-//     };
-//   },
-//   setup() {
 
-//     // const router = useRouter();
-//     // const emailAdd = ref('');
-//     // const pwd = ref('');
-//     const errorMessage = ref('');
-//     const payload = reactive({
-//         emailAdd: "",
-//         pwd: ""
-//     })
-
-//     function loginUser(){
-//         store.dispatch('login', payload)
-//     }
-
-//     // const handleLogin = async () => {
-//     //   try {
-//     //     const payload = { emailAdd: emailAdd.value, pwd: pwd.value };
-//     //     const { message, result } = await store.dispatch('login', payload);
-
-//     //     if (result) {
-//     //       emailAdd.value = '';
-//     //       pwd.value = '';
-//     //        // Redirect based on user role
-//     //        if (result.role === 'admin') {
-//     //         router.push({ name: 'adminDashboard' });
-//     //       } else {
-//     //         router.push({ name: 'sitters' });
-//     //       }
-//     //     } else {
-//     //       errorMessage.value = message;
-//     //     }
-//     //   } catch (error) {
-//     //     errorMessage.value = error.message;
-//     //     console.error('Login failed:', error);
-//     //   }
-//     // };
-
-//     return {
-//         // emailAdd,
-//         // pwd,
-//         errorMessage,
-//     //   handleLogin,
-//       loginUser
-//     };
-//   }
-// };
 </script>
 
 <style scoped>
-.container-fluid{
-    background-color: #d6d6d6;
-}
+
+
 .login-container {
     max-width: 100%;
     width: 100%;
     max-width: 400px;
-    /* Adjust as needed */
+   
     margin: 0 auto;
     padding: 20px;
-    /* border: 1px solid #ddd;
-    border-radius: 5px; */
-    background-color: #d6d6d6;
-    /* Ensures a good background color */
+
 }
 
 h1 {
     font-size: 1.5rem;
-    /* Responsive font size */
+    
     margin-bottom: 20px;
 }
 
@@ -149,10 +86,10 @@ button {
 .error {
     color: rgb(7, 7, 7);
     font-size: 0.875rem;
-    /* Smaller font size for error messages */
+   
 }
 
-/* Responsive Styles */
+
 @media (max-width: 576px) {
     .login-container {
         padding: 10px;
@@ -161,7 +98,7 @@ button {
 
     h1 {
         font-size: 1.25rem;
-        /* Adjust font size for smaller screens */
+     
     }
 
     input,

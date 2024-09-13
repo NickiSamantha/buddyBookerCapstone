@@ -14,7 +14,7 @@
         >Welcome to BuddyBooker 
         </h1>
         <i>Your Trusted Babysitting Solution</i>
-        <router-link to="/sitters" class="btn btn-secondary match">Find your match</router-link>
+        <router-link to="/sitters" class="btn btn-secondary match">Find your sitter</router-link>
     
       </div>
      </div>

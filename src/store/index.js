@@ -37,21 +37,28 @@ export default createStore({
     },
 //CART
 
-setCart(state, cart) {
-  state.cart = cart;
-  const userID = state.auth.userID
-  const cookieOptions = {
-    expires: 30
-  };
-  cookies.set(`cart_${userID}`,JSON.stringify(cart),cookieOptions);
+setCart(state, cartItems) {
+  state.cart = cartItems;
+  // const userID = state.auth.userID
+  // const cookieOptions = {
+  //   expires: 30
+  // };
+  // cookies.set(`cart_${userID}`,JSON.stringify(cartItems),cookieOptions);
 },
-removeFromCart(state, item) {
-  state.cart = state.cart.filter(i => i !== item);
+removeFromCart(state, itemId) {
+  state.cart = state.cart.filter(i => i !== itemId);
   const userID = state.auth.userID
   const cookieOptions = {
     expires: 30
   };
   cookies.set(`cart_${userID}`, JSON.stringify(state.cart), cookieOptions);
+},
+
+updateCartItems(state, updatedItem){
+  const index = state.cart.findIndex(item => item.id === updatedItem.id);
+  if (index !== -1) {
+    state.cart.splice(index, 1, updatedItem);
+  }
 },
 //set userID
 setUserID(state, userID) {
@@ -71,7 +78,11 @@ setUserID(state, userID) {
       state.user = value
   
     },
-
+//profile 
+// setUser (state, user){
+//   state.user = user; 
+// },
+ 
     setSitters(state, value) {
       state.sitters = value;
     },

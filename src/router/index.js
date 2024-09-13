@@ -52,6 +52,14 @@ const routes = [
     component : () => import( '../views/LoginView.vue')
   } , 
   {
+path: '/profile',
+name:'profile',
+beforeEnter(to, from, next) {
+  isAuthenticated() ? next() : next({ name: 'login' });
+},
+component: () => import('../views/ProfileView.vue')
+  },
+  {
     path: '/logout',
     name: 'logout',
     beforeEnter()  {

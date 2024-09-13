@@ -1,9 +1,9 @@
 <template>
-    <div class="my-5">
-    <h1 class="mb-4">Your Bookings</h1>
+    <div class="my-5 vh-100 ">
+    <h1 class="mb-4 text-center">Your Bookings</h1>
 
     <!-- Table to display bookings -->
-    <div v-if="cartItems && cartItems.length" class="table-responsive">
+    <div v-if="cartItems && cartItems.length" class="table-responsive bcolor m-5">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -23,28 +23,38 @@
             <td>{{ item.startTime }}</td>
             <td>{{ item.endTime }}</td>
             <td>
-              <button class="btn btn-danger btn-sm" @click="confirmDelete(item)">
+              <button class="btn btn-danger btn-sm mb-2" @click="confirmDelete(item.id)">
                 Delete
               </button>
-              <button class="btn btn-primary btn-sm" @click="editItem(item)">
+            
+      
+              <button class="btn btn-primary btn-sm mb-2" @click="editItem(item)">
                 Edit
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary" @click="proceedToPurchase">
-        Proceed to Purchase
-      </button>
+      <div colspan="4" class="payment-notice">
+            <p><strong>Please note:</strong> Payment for services will be collected after the service has been completed to ensure your satisfaction.</p>
+          </div>
+      <button class="btn btn-warning btn-sm mb-2 " @click="confirmDeleteAll">Delete All</button>
+     
+      <button class="btn btn-primary btn-sm mb-2 " @click="confirmProceedToPurchase">Book Now </button>
+     
+
+       
     </div>
+    <!-- Show message if the cart is empty -->
     <div v-else>
-      <p class="text-muted">Your cart is empty.</p>
-    </div>
+        <p class="text-center">You have no bookings, book a sitter.</p>
+      </div>
   
       <!-- Edit modal -->
+
       <div
         v-if="editingItem"
-        ref="editModalRef"
+ref="editModalRef"
         class="modal fade"
         id="editModal"
         tabindex="-1"
@@ -61,6 +71,7 @@
                 class="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                 @click="editingItem = null"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -94,7 +105,7 @@
                     v-model="editingItem.endTime"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary up">Update</button>
               </form>
             </div>
           </div>
@@ -108,13 +119,13 @@
   import { useStore } from "vuex";
   import { useCookies } from "vue3-cookies";
   import Swal from "sweetalert2";
-  
+
   const store = useStore();
   const { cookies } = useCookies();
   const cartItems = computed(() => store.state.cart);
   
   const loadCartFromCookies = () => {
-    const cartData = cookies.get("cart");
+    const cartData = cookies.get('cart');
     if (cartData) {
       try {
         const parsedCart = JSON.parse(cartData);
@@ -129,35 +140,80 @@
   };
   
   const updateCookies = () => {
-    cookies.set("cart", JSON.stringify(store.state.cart), "1d");
+    cookies.set('cart', JSON.stringify(store.state.cart), "1h");
   };
   
-  const proceedToPurchase = () => {
-    // Handle the proceed to purchase logic, like navigating to checkout page
-    console.log("Proceeding to purchase");
-  };
-  
-  const removeItem = (item) => {
-    store.commit("removeFromCart", item.id);
-    updateCookies();
-  };
-  
-  const confirmDelete = async (item) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d6d6d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "Cancel",
+
+  // Remove an item from the cart
+const removeItem = (itemId) => {
+  store.commit('removeFromCart', itemId);
+  updateCookies();
+};
+// Remove all items from the cart
+const removeAllItems = () => {
+  store.commit('setCart', []);
+  cookies.remove('cart_null'); 
+};
+// Confirm deletion of an item
+const confirmDelete = async (itemId) => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085D6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  });
+  if (result.isConfirmed) {
+    removeItem(itemId);
+    Swal.fire('Deleted!', 'Your item has been deleted.', 'success');
+  }
+};
+// Confirm deletion of all items
+const confirmDeleteAll = async () => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this! All items will be deleted.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#000',
+    cancelButtonColor: '#000',
+    confirmButtonText: 'Yes, delete all!',
+    cancelButtonText: 'Cancel'
+  });
+  if (result.isConfirmed) {
+    removeAllItems();
+    Swal.fire('Deleted!', 'All items have been deleted.', '💔').then(() => {
+     
+      // Optionally redirect to checkout page or refresh
+      // window.location.href = '/:id/bookings'; 
     });
-    if (result.isConfirmed) {
-      removeItem(item);
-      Swal.fire("Deleted!", "Your item has been deleted.", "success");
-    }
-  };
+  }
+};
+// Confirm and proceed to purchase
+const confirmProceedToPurchase = async () => {
+  const result = await Swal.fire({
+    title: 'Proceed to Purchase',
+    text: "Are you sure you want to book now? ",
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonColor: '#000',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '👍!',
+    cancelButtonText: '👎'
+  });
+  if (result.isConfirmed) {
+    cookies.remove('cart')
+    Swal.fire('Thank you for your booking!', '😁').then(() => {
+      
+      window.location.href = '/sitters'; 
+    });
+  }
+};
+// Load cart items on component mount
+
   
   const editingItem = ref(null);
   const editModalRef = ref(null);
@@ -177,18 +233,13 @@
   };
   
   const updateItem = () => {
-    try {
-      store.commit("updateCartItem", updatedItem.value);
-      updateCookies();
-      if (editModalRef.value) {
-        editModalRef.value.style.display = "none";
-        editModalRef.value.classList.remove("show");
-      }
-      editingItem.value = null;
-      updatedItem.value = {};
-    } catch (error) {
-      console.error("Failed to update item", error);
-    }
+  try {
+    store.commit("updateCartItem", editingItem.value); // Update the cart item in Vuex store
+    updateCookies(); // Update cookies with the new cart state
+    editingItem.value = null; // Close the modal
+  } catch (error) {
+    console.error("Failed to update item", error);
+  }
   };
   
   // Load cart items on component mount
@@ -200,8 +251,8 @@
 
 <style scoped>
 header {
-  background-color: #333;
-  color: #fff;
+  /* background-color: #333; */
+  /* color: #fff; */
   padding: 1rem;
   text-align: center;
 }
@@ -211,14 +262,14 @@ main {
 }
 
 #booking-list {
-  background: #d6d6d6;
+  /* background: #d6d6d6; */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
 }
 
 .booking-item {
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   padding: 0.5rem 0;
 }
 
@@ -244,6 +295,25 @@ button {
 }
 
 button:hover {
-  background-color: #151515;
+  background-color: #f2cdcd;
+  color: black;
+}
+/* .bcolor{
+  background-color: #7dd9e7dd;
+} */
+
+ .close {
+  margin-left: auto;
+ }
+ .up{
+ margin: 5px;
+ }
+ .btn-sm {
+margin: 5px;
+ }
+ .payment-notice {
+  background-color: #f9f9f9;
+  color: #555;
+  border-top: 1px solid #ddd;
 }
 </style>
